@@ -1,0 +1,28 @@
+{% extends "baselayout.html" %}
+
+{% block base %}
+<nav class="navbar" style="background-color: #4A3386;">
+    {% if access_token %}
+    <a class="navbar-brand" style="color: #FFCA08" href="{{ url_for('home')}}">Orak</a>
+    {% else %}
+    <a class="navbar-brand" style="color: #FFCA08" href="{{ url_for('login')}}">Orak</a>
+    {% endif %}
+
+    <ul class="nav nav-pills nav-fill">
+        {% if access_token %}
+        <li class="nav-item active">
+            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('home')}}"> Home </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('logout')}}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('login')}}">Login</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock base %}
+
+{% block content %} {% endblock content %}

@@ -1,0 +1,7 @@
+{
+    "local": "http://127.0.0.1:8080",
+    "pj": "http://<host>:<port>",
+    "dev": "http://<host>:<port>",
+    "qa": "http://<host>:<port>",
+    "prod": "http://<host>:<port>"
+}

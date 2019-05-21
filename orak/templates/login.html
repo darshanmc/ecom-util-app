@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card" style="width: 50rem; margin-top: 50px; margin-left: 30%;">
+    <div class="card-header" style="background-color: #4A3386; text-align: center;">
+        <h4 style="color: #FFCA08"> Orak </h4>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.environment.label}}
+                    {% if form.environment.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.environment.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {{ form.environment }}
+                    {% else %}
+                    {{ form.environment}}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary")}}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

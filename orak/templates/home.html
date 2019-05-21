@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card" style="width: 50rem; margin-top: 50px; margin-left: 30%;">
+  <div class="card-header" style="background-color: #4A3386; text-align: center;">
+    {% if env %}
+    <h4 style="color: #FFCA08">Environment Selected: {{ env }}</h4>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <div class="form-group">
+          {{ form.schema.label(class="form-control-label") }} <br>
+          {{ form.schema }}
+        </div>
+        <div class="form-group">
+          {{ form.body.label(class="form-control-label") }} <br>
+          {{ form.body }}
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{ form.execute(id="exec") }}
+        <input type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="card" style="width: 50rem; margin-top: 50px; margin-left: 30%;">
+  <div class="card-header" style="background-color: #4A3386; text-align: center;">
+    <h4 style="color: #FFCA08"> Other Utils </h4>
+  </div>
+
+  <div class="card-body">
+    <a href="/cache" target="_blank"> <button style="width: 200px; padding: 20px; margin-top: 20px; margin-left: 20px"> Get Cached Values</button> </a> <br>
+    <button id="bload" style="width: 200px; padding: 20px; margin-top: 20px; margin-left: 20px; margin-bottom: 20px"> Load Cache </button>
+    <div id="spinner" class="spinner-grow" role="status" style="display: none"></div>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $("#bload").on("click", function () {
+      var spinner = $("spinner")
+      spinner.show()
+      $.ajax({
+        url: '/loadcache',
+        type: 'GET',
+        success: function (data) {
+          
+          if (data.result === 'Success') {
+            alert('Cache loaded!')
+          } else if (data.result === 'Failed') {
+            alert('Unable to load cache!')
+          } else {
+            alert(data.result)
+          }
+          
+          spinner.hide()
+        },
+        error: function () {
+          spinner.hide()
+          alert('Error Occured!')
+        }
+      })
+    })
+  })
+</script>
+
+{% endblock content %}

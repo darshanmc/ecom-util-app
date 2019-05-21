@@ -1,0 +1,13 @@
+{
+    "login": "/<urlpath>",
+    "user_url": "/<urlpath>",
+    "organization_bulk": "/<urlpath>",
+    "ftb_order_bulk": "/<urlpath>",
+    "ftb_order_report_bulk": "/<urlpath>",
+    "dealer_order_report_bulk": "/<urlpath>",
+    "dealer_order_bulk": "/<urlpath>",
+    "dealer_bulk": "/<urlpath>",
+    "cache": "/<urlpath>",
+    "loadcache": "/<urlpath>",
+    "metadata": "/<urlpath>"
+}
