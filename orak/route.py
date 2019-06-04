@@ -10,18 +10,18 @@ from orak.services import get_cached_values, load_cache
 @app.route('/login', methods=["POST", "GET"])
 def login():
     form = LoginForm()
-
-    if form.validate_on_submit():
-        access_token, env, success = login_call(username=form.username.data, password=form.password.data, env = form.environment.data)
-        if success:
-            flash('Logged in successfully', 'success')
-            resp =  redirect(url_for('home'))
-            resp.set_cookie('access-token',access_token) 
-            resp.set_cookie('env', env)
-            return resp
-        else:
-            flash(access_token, 'danger')
-            render_template('login.html', form=form, title='Login')
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            access_token, env, success = login_call(username=form.username.data, password=form.password.data, env = form.environment.data)
+            if success:
+                flash('Logged in successfully', 'success')
+                resp =  redirect(url_for('home'))
+                resp.set_cookie('access-token',access_token) 
+                resp.set_cookie('env', env)
+                return resp
+            else:
+                flash(access_token, 'danger')
+                render_template('login.html', form=form, title='Login')
 
     return render_template('login.html', form=form, title='Login')
 
@@ -31,12 +31,14 @@ def home():
     env = request.cookies.get('env')
     if access_token and env:
         form = BulkUploadForm()
-        if form.validate_on_submit():
-            message, message_type = bulk_load(schema=form.schema.data, env=env, body=form.body.data, access_token=access_token) 
-            if message and message_type:
-                flash(message, message_type)
-            else:
-                flash('Unable to call endpoint!', 'danger')    
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                message, message_type = bulk_load(schema=form.schema.data, env=env, body=form.body.data, access_token=access_token) 
+                form.body.data = ''
+                if message and message_type:
+                    flash(message, message_type)
+                else:
+                    flash('Unable to call endpoint!', 'danger')    
     
         return render_template('home.html', form=form, access_token = access_token, env=env)
     else:
