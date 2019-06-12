@@ -24,6 +24,7 @@
       <div class="form-group">
         {{ form.execute(id="exec") }}
         <input type="reset" value="Reset">
+        <div id="bulk-spinner" class="spinner-grow" role="status" style="display: none"></div>
       </div>
     </form>
   </div>
@@ -45,7 +46,7 @@
 <script>
   $(function () {
     $("#bload").on("click", function () {
-      var spinner = $("spinner")
+      var spinner = $("#spinner")
       spinner.show()
       $.ajax({
         url: '/loadcache',
@@ -68,6 +69,14 @@
         }
       })
     });
+
+    $("#exec").on('click', function () {
+      alert('Clicked execute!')
+      var bulkspinner = $("#bulk-spinner");
+      bulkspinner.show();
+      $("#exec").attr("disabled", true);
+    });
+
   })
 </script>
 
