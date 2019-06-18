@@ -33,5 +33,6 @@ bulk_service['FTB Order'] = urls['ftb_order_bulk']
 bulk_service['FTB Order Report'] = urls['ftb_order_report_bulk']
 bulk_service['Dealer Order Report'] = urls['dealer_order_report_bulk']
 bulk_service['Dealer Order'] = urls['dealer_order_bulk']
+bulk_service['Dealer'] = urls['dealer_bulk']
 
 from orak import route

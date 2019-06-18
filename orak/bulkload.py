@@ -6,8 +6,12 @@ def bulk_load(schema, env, body, access_token):
     schema = bulk_service[schema]
     url = environment[env] + schema
 
-    ids = body.split(',')
-    payload = json.dumps(ids)
+    if body:
+        ids = body.split(',')
+        payload = json.dumps(ids)
+    else:
+        payload = []
+                
 
     headers = {
         "content-type": "application/json"
