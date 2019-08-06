@@ -13,3 +13,8 @@ class BulkUploadForm(FlaskForm):
     schema = SelectField(label='Schema', choices=[('User', 'User'),('Organization', 'Organization'), ('Dealer', 'Dealer'), ('Dealer Order', 'Dealer Order'), ('Dealer Order Report', 'Dealer Order Report'), ('FTB Order', 'FTB Order'), ('FTB Order Report', 'FTB Order Report')])
     body = StringField('IDs')    
     execute = SubmitField(label='Execute')
+
+class B2BBulkForm(FlaskForm):
+    environment = RadioField(label='Environment', validators=[DataRequired()], choices=[('Local', 'Local'), ('PJ', 'Project'), ('QA', 'QA'), ('PROD', 'Production')])    
+    schema = SelectField(label='Schema', choices=[('mappingAudit', 'Mapping Audit'),('destinationTransport', 'Destination Transport'), ('cxmlVersions', 'CXML Versions'), ('dateTransaction', 'Date Transaction'), ('setupRoute', 'Setup Route'), ('scheduler', 'Scheduler'), ('transaction', 'Transaction'), ('timeTransaction','Time Transaction'), ('transTypeXRef', 'Trans Type X Ref'), ('processSetup','Process Setup'), ('sourceTransport', 'Source Transport'), ('xmlXPath', 'XML X Path')])
+    execute = SubmitField(label='Execute')

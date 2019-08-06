@@ -1,12 +1,29 @@
 from orak import app
 from flask import render_template, flash, redirect, url_for, make_response, request, jsonify
-from orak.forms import LoginForm, BulkUploadForm
+from orak.forms import LoginForm, BulkUploadForm, B2BBulkForm
 from orak.login import login_call
-from orak.bulkload import bulk_load
+from orak.bulkload import bulk_load, b2b_bulk_load
 from orak.services import get_cached_values, load_cache
 
 
 @app.route('/', methods=["POST", "GET"])
+def index():
+    return render_template('index.html')
+
+@app.route('/b2bhome', methods=["POST", "GET"])
+def b2bhome():
+    form = B2BBulkForm()
+    
+    if request.method == 'POST':
+            if form.validate_on_submit():
+                message, message_type = b2b_bulk_load(schema=form.schema.data, env=form.environment.data) 
+                if message and message_type:
+                    flash(message, message_type)
+                else:
+                    flash('Unable to call endpoint!', 'danger')
+
+    return render_template('b2bhome.html', form=form)    
+
 @app.route('/login', methods=["POST", "GET"])
 def login():
     form = LoginForm()

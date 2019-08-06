@@ -35,4 +35,16 @@ bulk_service['Dealer Order Report'] = urls['dealer_order_report_bulk']
 bulk_service['Dealer Order'] = urls['dealer_order_bulk']
 bulk_service['Dealer'] = urls['dealer_bulk']
 
+with open('orak/resource/b2benv.json') as b2benv_file:
+    b2b_env_obj = json.loads(b2benv_file.read())
+
+b2b_environment = {}
+b2b_environment['Local'] = b2b_env_obj['local']
+b2b_environment['PJ'] = b2b_env_obj['pj']
+b2b_environment['QA'] = b2b_env_obj['qa']
+b2b_environment['PROD'] = b2b_env_obj['prod']
+
+with open('orak/resource/b2burl.json') as b2burl_file:
+    b2b_urls = json.loads(b2burl_file.read())
+
 from orak import route

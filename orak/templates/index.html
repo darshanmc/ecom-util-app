@@ -2,6 +2,14 @@
 
 {% block content %}
 
-<h1>Index Page</h1>
+<div class="card" style="width: 50rem; margin: 0 auto; margin-top: 200px;">
+    <div class="card-header" style="background-color: #4A3386; text-align: center;">
+        <h4 style="color: #FFCA08"> Welcome </h4>
+    </div>
+    <div class="card-body">
+      <a href="{{url_for('login')}}"> <button type="button" class="btn btn-primary btn-lg btn-block">  e-Commerce Util</button> </a> <br>
+      <a href="{{url_for('b2bhome')}}"> <button type="button" class="btn btn-secondary btn-lg btn-block">  B2B Util </button> </a>
+    </div>
+</div>
 
 {% endblock content %}

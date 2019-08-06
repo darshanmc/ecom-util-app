@@ -1,6 +1,6 @@
 import requests
 import json
-from orak import bulk_service, environment
+from orak import bulk_service, environment, b2b_environment, b2b_urls
 
 def bulk_load(schema, env, body, access_token):
     schema = bulk_service[schema]
@@ -31,3 +31,16 @@ def bulk_load(schema, env, body, access_token):
         error_code = resp['errorCodes'][0]['errorCode']
         return error_code, 'danger'
 
+def b2b_bulk_load(schema, env):
+    url = b2b_environment[env] + b2b_urls[schema]
+
+    headers = {
+        "content-type": "application/json"
+    }
+
+    response = requests.get(url=url, headers=headers)
+
+    if response.ok:
+        return 'Records uploaded successfully', 'success'
+    else:
+        return 'Bulk upload failed', 'danger'    
