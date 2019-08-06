@@ -38,9 +38,12 @@ def b2b_bulk_load(schema, env):
         "content-type": "application/json"
     }
 
-    response = requests.get(url=url, headers=headers)
+    try:
+        response = requests.get(url=url, headers=headers)
 
-    if response.ok:
-        return 'Records uploaded successfully', 'success'
-    else:
-        return 'Bulk upload failed', 'danger'    
+        if response.ok:
+            return 'Records uploaded successfully', 'success'
+        else:
+            return 'Bulk upload failed', 'danger'    
+    except Exception:
+        return f"Unable to connect to {env} environment", 'danger'        
