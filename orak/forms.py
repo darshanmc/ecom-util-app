@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField, RadioField
-from wtforms.validators import DataRequired, Length, Email
+from wtforms import StringField, PasswordField, SubmitField, SelectField, RadioField, DateTimeField
+from wtforms.fields.html5 import DateField, TimeField
+from wtforms.validators import DataRequired, Length, Email, Optional
 
 
 class LoginForm(FlaskForm):
@@ -16,5 +17,9 @@ class BulkUploadForm(FlaskForm):
 
 class B2BBulkForm(FlaskForm):
     environment = RadioField(label='Environment', validators=[DataRequired()], choices=[('Local', 'Local'), ('PJ', 'Project'), ('QA', 'QA'), ('PROD', 'Production')])    
-    schema = SelectField(label='Schema', choices=[('mappingAudit', 'Mapping Audit'),('destinationTransport', 'Destination Transport'), ('cxmlVersions', 'CXML Versions'), ('rangeDateTransaction', 'Range Date Transaction'), ('processSetupRoute', 'Process Setup Route'), ('scheduler', 'Scheduler'), ('transaction', 'Transaction'), ('rangeDateTimeTransaction','Range Date Time Transaction'), ('transTypeXRef', 'Trans Type X Ref'), ('processSetup','Process Setup'), ('sourceTransport', 'Source Transport'), ('xmlXPath', 'XML X Path')])
+    schema = SelectField(label='Schema', validators=[DataRequired()], choices=[('mappingAudit', 'Mapping Audit'),('destinationTransport', 'Destination Transport'), ('cxmlVersions', 'CXML Versions'), ('rangeDateTransaction', 'Range Date Transaction'), ('processSetupRoute', 'Process Setup Route'), ('scheduler', 'Scheduler'), ('transaction', 'Transaction'), ('rangeDateTimeTransaction','Range Date Time Transaction'), ('transTypeXRef', 'Trans Type X Ref'), ('processSetup','Process Setup'), ('sourceTransport', 'Source Transport'), ('xmlXPath', 'XML X Path')])
+    date = DateField(label='Date', format='%Y-%m-%d', validators=[Optional()])
+    start_time = TimeField(label='Start Time', format='%H:%M', validators=[Optional()])
+    end_time = TimeField(label='End Time', format='%H:%M', validators=[Optional()])
     execute = SubmitField(label='Execute')
+    

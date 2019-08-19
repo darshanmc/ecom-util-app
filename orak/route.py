@@ -16,7 +16,7 @@ def b2bhome():
     
     if request.method == 'POST':
             if form.validate_on_submit():
-                message, message_type = b2b_bulk_load(schema=form.schema.data, env=form.environment.data) 
+                message, message_type = b2b_bulk_load(schema=form.schema.data, env=form.environment.data, date=form.date.data, start_time=form.start_time.data, end_time=form.end_time.data) 
                 if message and message_type:
                     flash(message, message_type)
                 else:

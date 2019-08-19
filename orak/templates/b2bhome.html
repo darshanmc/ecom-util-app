@@ -1,31 +1,79 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    
+
 <div class="card" style="width: 50rem; margin: 0 auto; margin-top: 20px;">
-        <div class="card-header" style="background-color: #4A3386; text-align: center;">
-                <h4 style="color: #FFCA08"> B2B Bulk Upload </h4>
-        </div>
-        <div class="card-body">
-          <form method="POST" action="">
+    <div class="card-header" style="background-color: #4A3386; text-align: center;">
+        <h4 style="color: #FFCA08"> B2B Bulk Upload </h4>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset>
-              <div class="form-group">
-                {{ form.schema.label }} <br>
-                {{ form.schema }}
-              </div>
-              <div class="form-group">
-                {{ form.environment.label }} <br>
-                {{ form.environment }}
-              </div>
+                <div class="form-group">
+                    {{ form.schema.label }} <br>
+                    {{ form.schema (id="schema") }}
+                </div>
+                <div class="form-group">
+                    {{ form.environment.label }} <br>
+                    {{ form.environment }}
+                </div>
+                <div class="form-group" id="date" style="display: none">
+                    {{ form.date.label }} <br>
+                    {{ form.date }}
+                </div>
+                <div class="form-group" id="start_time" style="display: none">
+                    {{ form.start_time.label }} <br>
+                    {{ form.start_time }}
+                </div>
+                <div class="form-group" id="end_time" style="display: none">
+                    {{ form.end_time.label }} <br>
+                    {{ form.end_time }}
+                </div>
             </fieldset>
             <div class="form-group">
-              {{ form.execute(id="exec") }}
-              <input type="reset" value="Reset">
-              <div id="bulk-spinner" class="spinner-grow" role="status" style="display: none"></div>
+                {{ form.execute(id="exec") }}
+                <input type="reset" value="Reset">
+                <div id="bulk-spinner" class="spinner-grow" role="status" style="display: none"></div>
             </div>
-          </form>
-        </div>
-      </div>
-    
+        </form>
+    </div>
+</div>
+
+<script>
+    var dateField = $("#date")
+    var startTime = $("#start_time")
+    var endTime = $("#end_time")
+    var schema = $("#schema")
+
+    schema.on("change", function () {
+        if (schema.val() === 'rangeDateTransaction') {
+            dateField.show();
+        } else if (schema.val() === 'rangeDateTimeTransaction') {
+            dateField.show();
+            startTime.show();
+            endTime.show();
+        } else {
+            dateField.hide();
+            startTime.hide();
+            endTime.hide();
+        }
+    })
+
+    $(function () {
+        if (schema.val() === 'rangeDateTransaction') {
+            dateField.show();
+        } else if (schema.val() === 'rangeDateTimeTransaction') {
+            dateField.show();
+            startTime.show();
+            endTime.show();
+        } else {
+            dateField.hide();
+            startTime.hide();
+            endTime.hide();
+        }
+    })
+
+</script>
+
 {% endblock content %}
