@@ -11,16 +11,43 @@
             {{ form.hidden_tag() }}
             <fieldset>
                 <div class="form-group">
-                    {{ form.schema.label }} <br>
-                    {{ form.schema (id="schema") }}
+                        {{ form.schema.label}}
+                        {% if form.schema.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.schema.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {{ form.schema (id="schema")}}
+                        {% else %}
+                        {{ form.schema (id="schema")}}
+                        {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.environment.label }} <br>
-                    {{ form.environment }}
+                        {{ form.environment.label}}
+                        {% if form.environment.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.environment.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {{ form.environment }}
+                        {% else %}
+                        {{ form.environment}}
+                        {% endif %}
                 </div>
                 <div class="form-group" id="date" style="display: none">
-                    {{ form.date.label }} <br>
-                    {{ form.date }}
+                        {{ form.date.label}}
+                        {% if form.date.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.date.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {{ form.date }}
+                        {% else %}
+                        {{ form.date}}
+                        {% endif %}
                 </div>
                 <div class="form-group" id="start_time" style="display: none">
                     {{ form.start_time.label }} <br>
