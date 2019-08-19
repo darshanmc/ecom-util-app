@@ -35,9 +35,10 @@ def login_call(username, password, env):
                     for role in role_list:
                         if role == 'Site Administrator':
                             is_authorized = True
+                            full_name = metadata_model['firstName']
 
                     if is_authorized:
-                        return access_token, env, True
+                        return access_token, env, True, full_name
                     else:
                         return 'You are not authorized to access!', env, False        
 

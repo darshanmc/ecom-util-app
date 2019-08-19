@@ -2,23 +2,22 @@
 
 {% block base %}
 <nav class="navbar" style="background-color: #4A3386;">
-    {% if access_token %}
-    <a class="navbar-brand" style="color: #FFCA08" href="{{ url_for('home')}}">Orak</a>
-    {% else %}
-    <a class="navbar-brand" style="color: #FFCA08" href="{{ url_for('login')}}">Orak</a>
-    {% endif %}
+    <a class="navbar-brand" style="color: #FFCA08" href="{{ url_for('index')}}">Orak</a>
 
     <ul class="nav nav-pills nav-fill">
         {% if access_token %}
         <li class="nav-item active">
-            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('home')}}"> Home </a>
+            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('home')}}"> Hello {{ full_name }} </a>
         </li>
+        <li class="nav-item">
+                <a class="nav-link" style="color: #FFCA08" href="{{ url_for('b2bhome')}}">Switch to B2B</a>
+            </li>
         <li class="nav-item">
             <a class="nav-link" style="color: #FFCA08" href="{{ url_for('logout')}}">Logout</a>
         </li>
         {% else %}
         <li class="nav-item">
-            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('login')}}">Login</a>
+            <a class="nav-link" style="color: #FFCA08" href="{{ url_for('login')}}"> Switch to eCommerce </a>
         </li>
         {% endif %}
     </ul>

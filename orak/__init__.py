@@ -13,7 +13,9 @@ environment['Local'] = env_obj['local']
 environment['PJ'] = env_obj['pj']
 environment['DEV'] = env_obj['dev']
 environment['QA'] = env_obj['qa']
+environment['CQA'] = env_obj['cqa']
 environment['PROD'] = env_obj['prod']
+environment['CPROD'] = env_obj['cprod']
 
 with open('orak/resource/url.json') as url_file:
     urls = json.loads(url_file.read())
@@ -23,7 +25,9 @@ login_service['Local'] = env_obj['local'] + urls['login']
 login_service['PJ'] = env_obj['pj'] + urls['login']
 login_service['DEV'] = env_obj['dev'] + urls['login']
 login_service['QA'] = env_obj['qa'] + urls['login']
+login_service['CQA'] = env_obj['cqa'] + urls['login']
 login_service['PROD'] = env_obj['prod'] + urls['login']
+login_service['CPROD'] = env_obj['cprod'] + urls['login']
 
 bulk_service = {}
 

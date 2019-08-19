@@ -8,7 +8,9 @@ from orak.services import get_cached_values, load_cache
 
 @app.route('/', methods=["POST", "GET"])
 def index():
-    return render_template('index.html')
+    access_token = request.cookies.get('access-token')
+    full_name = request.cookies.get('fullname')
+    return render_template('index.html', access_token = access_token, full_name = full_name)
 
 @app.route('/b2bhome', methods=["POST", "GET"])
 def b2bhome():
@@ -26,15 +28,23 @@ def b2bhome():
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+    access_token = request.cookies.get('access-token')
+
+    # If there is valid access token the redirect to home page
+    if access_token:
+        resp = redirect(url_for('home'))
+        return resp
+
     form = LoginForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            access_token, env, success = login_call(username=form.username.data, password=form.password.data, env = form.environment.data)
+            access_token, env, success, full_name = login_call(username=form.username.data, password=form.password.data, env = form.environment.data)
             if success:
                 flash('Logged in successfully', 'success')
                 resp =  redirect(url_for('home'))
                 resp.set_cookie('access-token',access_token) 
                 resp.set_cookie('env', env)
+                resp.set_cookie('fullname', full_name)
                 return resp
             else:
                 flash(access_token, 'danger')
@@ -46,6 +56,7 @@ def login():
 def home():
     access_token = request.cookies.get('access-token')
     env = request.cookies.get('env')
+    full_name = request.cookies.get('fullname')
     if access_token and env:
         form = BulkUploadForm()
         if request.method == 'POST':
@@ -57,7 +68,7 @@ def home():
                 else:
                     flash('Unable to call endpoint!', 'danger')    
     
-        return render_template('home.html', form=form, access_token = access_token, env=env)
+        return render_template('home.html', form=form, access_token = access_token, env=env, full_name = full_name)
     else:
         flash('Please login', 'danger')
         return redirect(url_for('login'))    

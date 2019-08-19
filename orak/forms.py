@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, Optional
 
 
 class LoginForm(FlaskForm):
-    environment =  RadioField(label='Environment', validators=[DataRequired()], choices=[('Local', 'Local'), ('PJ', 'Project'), ('DEV', 'Dev (CLOUD)'), ('QA', 'QA (CLOUD)'), ('PROD', 'Production (CLOUD)')])
+    environment =  RadioField(label='Environment', validators=[DataRequired()], choices=[('Local', 'Local'), ('PJ', 'Project'), ('DEV', 'Dev (CLOUD)'), ('QA', 'QA (CLOUD)'), ('CQA', 'China QA (CLOUD)'), ('PROD', 'Production (CLOUD)'), ('CPROD', 'China Production (CLOUD)')])
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=40), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField(label='Submit')
