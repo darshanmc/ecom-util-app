@@ -10,7 +10,7 @@ def get_cached_values(access_token, env):
     headers['access-token'] = access_token
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers = headers)
         if response.ok:
             return json.loads(response.text)
         elif response.status_code == 401:
@@ -26,7 +26,7 @@ def load_cache(access_token, env):
     headers['access-token'] = access_token
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers = headers)
         if response.ok:
             return 'Success'
         else:
