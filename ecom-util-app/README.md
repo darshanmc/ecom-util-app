@@ -20,7 +20,7 @@ Steps to build and deploy app in docker:
    https://drive.google.com/file/d/1Aqctw2yUVh_3lue1SlPwAeO0nFfEiRJC/view?usp=sharing
 3. cd into the downloaded location
 4. Run the command
-   docker import ubuntu_read.tar ubuntu-ready:version4
+   docker import ubuntu_read.tar ubuntu-ready:version-4
 5. cd into the app folder, make sure the Dockerfile is in the folder and run the below command
    docker build --tag=util-app .
 6. Run the docker image with below command
