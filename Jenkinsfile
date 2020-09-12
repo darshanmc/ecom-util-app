@@ -1,17 +1,16 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
+    agent any
 
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh '''docker build
-'''
-      }
+    stages {
+        stage('Notify') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'docker build'
+            }
+        }
     }
-
-  }
 }
