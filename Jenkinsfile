@@ -12,5 +12,10 @@ pipeline {
                 sh 'docker build --tag=util-app .'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker run -p 8000:8000 util-app:latest'
+            }
+        }
     }
 }
